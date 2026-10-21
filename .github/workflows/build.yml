@@ -22,14 +22,17 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      # Pass supported SDK packages explicitly. Do not let setup-android
+      # fall back to the obsolete "tools" package.
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: "platform-tools platforms;android-36 build-tools;36.0.0"
 
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
-
-      - name: Set up Gradle
+      - name: Set up Gradle 8.13
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.13"
 
       - name: Build debug APK
         run: gradle --no-daemon --stacktrace assembleDebug
