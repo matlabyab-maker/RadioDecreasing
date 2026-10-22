@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         qualityRuler.setListener(v->{qualityValue.setText(v+" kbps"); if(!usagePlaying){activeKbps=ProxyConfig.effectiveKbps(this,v); updateUsage(activeKbps);} status.setText("Quality target: "+v+" kbps");});
         volumeRuler.setListener(v->setOutputVolume(v));
         findViewById(R.id.record).setOnClickListener(v->toggleRecording());
-        eqButton.setOnClickListener(v->showEqualizer());
+        if(eqButton!=null) eqButton.setOnClickListener(v->showEqualizer());
         findViewById(R.id.tvPrev).setOnClickListener(v->tvNewsTicker.previous());
         findViewById(R.id.tvNext).setOnClickListener(v->tvNewsTicker.next());
         findViewById(R.id.tvPause).setOnClickListener(v->{tvNewsTicker.togglePause(); ((Button)v).setText(tvNewsTicker.isPaused()?"RESUME":"PAUSE");});
